@@ -1,0 +1,15 @@
+.not-found-page {
+  max-width: 850px;
+  margin-top: 90px;
+  margin-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.not-found-page .page-title {
+  font-weight: 700;
+  font-size: 26px;
+  margin-bottom: 25px;
+}

@@ -4,6 +4,23 @@ import Checkmark from "../assets/images/icons/checkmark.png";
 import "./HomePage.css";
 
 export function HomePage() {
+
+  /*
+  fetch('http://localhost:3000/api/products')
+    .then((response) => {
+      response.json().then((data) => {
+        console.log(data);
+      })
+    });
+  */
+
+  fetch('http://localhost:3000/api/products')
+    .then((response) => {
+      return response.json();
+    }).then((data) => {
+      console.log(data);
+    });
+
   return (
     <>
       <title>Ecommerce Project</title>

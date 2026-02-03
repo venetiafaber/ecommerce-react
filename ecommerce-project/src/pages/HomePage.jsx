@@ -5,42 +5,21 @@ import Checkmark from "../assets/images/icons/checkmark.png";
 import "./HomePage.css";
 
 export function HomePage() {
-
-  /*
-  fetch('http://localhost:3000/api/products')
-    .then((response) => {
-      response.json().then((data) => {
-        console.log(data);
-      })
-    });
-  */
-
-  /* //shortcut 
-  fetch('http://localhost:3000/api/products')
-    .then((response) => {
-      return response.json();
-    }).then((data) => {
-      console.log(data);
-    });
-  */
-
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products')
+    axios.get('/api/products')
     .then((response) => {
       setProducts(response.data);
     });
   }, []);
 
-  axios.get('http://localhost:3000/api/cart-items')
+  axios.get('/api/cart-items')
     .then((response) => {
       setCart(response.data);
-    })
-  
+    });
 
-  
   return (
     <>
       <title>Ecommerce Project</title>

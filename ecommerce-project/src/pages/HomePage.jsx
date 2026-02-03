@@ -13,12 +13,11 @@ export function HomePage() {
     .then((response) => {
       setProducts(response.data);
     });
-  }, []);
-
-  axios.get('/api/cart-items')
+    axios.get('/api/cart-items')
     .then((response) => {
       setCart(response.data);
     });
+  }, []);
 
   return (
     <>

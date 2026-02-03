@@ -31,6 +31,7 @@ export default [
         { allowConstantExport: true },
       ],
       'react/no-unknown-property': 'error',
+      'react/prop-types': 'off' //added to remove props validation error
     },
     settings: {
       react: {

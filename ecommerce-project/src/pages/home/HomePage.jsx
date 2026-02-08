@@ -12,6 +12,7 @@ export function HomePage({ cart }) {
       const response = await axios.get('/api/products');
       setProducts(response.data);
     }
+    
     getHomeData();
   }, []);
 

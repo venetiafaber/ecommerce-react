@@ -4,26 +4,29 @@ import { formatMoney } from "../../utils/money";
 
 export function CartItemDetails({ cartItem, loadCart }) {
   const [quantity, setQuantity] = useState(cartItem.quantity);
-  // let isUpdatingQuantity = true;
+  const [isUpdatingQuantity, setIsUpdatingQuantity] = useState(false);
 
   const deleteCartItem = async () => {
     await axios.delete(`/api/cart-items/${cartItem.productId}`);
     await loadCart();
-  }
-
-  const selectQuantity = (event) => {
-    const quantitySelected = Number(event.target.value);
-    setQuantity(quantitySelected);
   };
 
-  const updateCartItem = async () => {
-    // isUpdatingQuantity = true;
+  const updateQuantityInput = (event) => {
+    const quantityEntered = Number(event.target.value);
+    setQuantity(quantityEntered);
+  };
+
+  const updateQuantity = async () => {
+    if (isUpdatingQuantity) {
+      setIsUpdatingQuantity(false);
+    } else {
+      setIsUpdatingQuantity(true);
+    }
     await axios.put(`/api/cart-items/${cartItem.productId}`, {
-      quantity
+      quantity,
     });
     await loadCart();
-    // isUpdatingQuantity = false;
-  }
+  };
 
   return (
     <>
@@ -36,34 +39,31 @@ export function CartItemDetails({ cartItem, loadCart }) {
         </div>
         <div className="product-quantity">
           <span>
-            Quantity:{" "}
-            {/* {!isUpdatingQuantity && <span className="quantity-label">{cartItem.quantity}</span>} */}
-            { 
-              // isUpdatingQuantity && 
-              <div className="product-quantity-container">
-                <select
-                  value={quantity}
-                  onChange={selectQuantity}
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-              </div>
-            }
+            Quantity:
+            {isUpdatingQuantity ? (
+              <input
+                type="text"
+                placeholder="Enter the quantity"
+                className="product-quantity-input"
+                value={quantity}
+                onChange={updateQuantityInput}
+              />
+            ) : (
+              <span className="quantity-label">{cartItem.quantity}</span>
+            )}
           </span>
-          <span className="update-quantity-link link-primary"
-            onClick={updateCartItem}>Update</span>
-          <span className="delete-quantity-link link-primary"
+          <span
+            className="update-quantity-link link-primary"
+            onClick={updateQuantity}
+          >
+            Update
+          </span>
+          <span
+            className="delete-quantity-link link-primary"
             onClick={deleteCartItem}
-          >Delete</span>
+          >
+            Delete
+          </span>
         </div>
       </div>
     </>
